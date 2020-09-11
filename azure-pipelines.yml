@@ -1,59 +1,56 @@
 parameters:
-- name: myString
+- name: resource_group
+  displayName: Resource Group
   type: string
-  default: a string
-- name: myMultiString
+  default: d3_dev_01
+  values:
+  - d3_dev_01
+  - d3_qa_01
+  
+- name: sku_size
+  displayName: App Service Plan SKU & Size
   type: string
-  default: default
+  default: FREE
   values:
-  - default
-  - ubuntu
-- name: myNumber
-  type: number
-  default: 2
-  values:
-  - 1
-  - 2
-  - 4
-  - 8
-  - 16
-- name: myBoolean
+  - FREE
+  - B1
+  - B2
+  - B3
+  - D1
+  - F1
+  - I1
+  - I2
+  - I3
+  - P1V2
+  - P2V2
+  - P3V2
+  - PC2
+  - PC3
+  - PC4
+  - S1
+  - S2
+  - S3
+  - SHARED
+- name: is_linux
+  displayName: Is Linux?
   type: boolean
   default: true
-- name: myObject
-  type: object
-  default:
-    foo: FOO
-    bar: BAR
-    things:
-    - one
-    - two
-    - three
-    nested:
-      one: apple
-      two: pear
-      count: 3
-- name: myStep
-  type: step
-  default:
-    script: echo my step
-- name: mySteplist
-  type: stepList
-  default:
-    - script: echo step one
-    - script: echo step two
+  
+  
 pool:
   vmImage: 'ubuntu-latest'
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-
-- task: AzureCLI@2
-  inputs:
-    azureSubscription: 'Free Trial(dcc87da0-ebd1-425f-a58b-a08f6f1490c9)'
-    scriptType: 'bash'
-    scriptLocation: 'inlineScript'
-    inlineScript: 'az appservice plan create -g d3_dev_01 -n MyPlan --is-linux --sku Free'
-    #'az container create --resource-group d3_dev_01 --file container_instance.yml'
-    addSpnToEnvironment: true 
+stages:
+- stage: 
+  jobs:
+  - job: 'Create or Update Azure WebApp'
+    displayName: 'Create or Update Azure WebApp'
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'Free Trial(dcc87da0-ebd1-425f-a58b-a08f6f1490c9)'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: 'az appservice plan create -g {{parameters.resource_group}} -n MyPlan --is-linux --sku ${{sku_size}}'
+        addSpnToEnvironment: true 
+      displayName: Create WebApp plan
+      condition: ${{ if eq(parameters.is_linux, true) }} 
