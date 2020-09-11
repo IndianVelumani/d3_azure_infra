@@ -46,7 +46,7 @@ stages:
   - job: 'Create or Update Azure WebApp'
     displayName: 'Create or Update Azure WebApp'
 
-    -steps:  
+    steps:  
       
     - task: AzureCLI@2
       inputs:
