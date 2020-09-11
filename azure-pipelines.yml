@@ -41,8 +41,9 @@ parameters:
   - S2
   - S3
   - SHARED
+  
 - name: is_linux
-  displayName: Is Linux?
+  displayName: App ServeicePlan Is Linux?
   type: boolean
   default: true
   
