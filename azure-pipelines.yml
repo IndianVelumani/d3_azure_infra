@@ -9,7 +9,8 @@ steps:
 - task: AzureCLI@2
   inputs:
     azureSubscription: 'Free Trial(dcc87da0-ebd1-425f-a58b-a08f6f1490c9)'
-    scriptType: 'ps'
+    scriptType: 'bash'
     scriptLocation: 'inlineScript'
-    inlineScript: 'az container create --resource-group d3_dev_01 --file container_instance.yml'
+    inlineScript: 'az --version'
+    #'az container create --resource-group d3_dev_01 --file container_instance.yml'
     addSpnToEnvironment: true
