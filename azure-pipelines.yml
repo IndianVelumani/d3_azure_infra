@@ -53,6 +53,15 @@ stages:
         azureSubscription: 'Free Trial(dcc87da0-ebd1-425f-a58b-a08f6f1490c9)'
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
-        inlineScript: 'az appservice plan create -g ${{parameters.resource_group}} -n MyPlan --is-linux --sku ${{parameters.sku_size}}'
+        inlineScript: 'az appservice plan create -g ${{parameters.resource_group}} -n MyPlan-linux --is-linux --sku ${{parameters.sku_size}}'
         addSpnToEnvironment: true 
       condition: and(succeeded(), eq('${{ parameters.is_linux }}', true))
+      
+     - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'Free Trial(dcc87da0-ebd1-425f-a58b-a08f6f1490c9)'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: 'az appservice plan create -g ${{parameters.resource_group}} -n MyPlan-Windows  --sku ${{parameters.sku_size}}'
+        addSpnToEnvironment: true 
+      condition: and(succeeded(), eq('${{ parameters.is_linux }}', false)) 
