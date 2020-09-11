@@ -55,7 +55,7 @@ stages:
         scriptLocation: 'inlineScript'
         inlineScript: 'az appservice plan create -g ${{parameters.resource_group}} -n MyPlan-linux --is-linux --sku ${{parameters.sku_size}}'
         addSpnToEnvironment: true 
-      displayname: Azure WebApp for linux   
+      displayName: Azure WebApp for linux   
       condition: and(succeeded(), eq('${{ parameters.is_linux }}', true))
       
     - task: AzureCLI@2
@@ -65,5 +65,5 @@ stages:
         scriptLocation: 'inlineScript'
         inlineScript: 'az appservice plan create -g ${{parameters.resource_group}} -n MyPlan-Windows  --sku ${{parameters.sku_size}}'
         addSpnToEnvironment: true 
-      displayname: Azure WebApp for windows  
+      displayName: Azure WebApp for windows  
       condition: and(succeeded(), eq('${{ parameters.is_linux }}', false)) 
