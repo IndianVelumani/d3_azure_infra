@@ -55,5 +55,4 @@ stages:
         scriptLocation: 'inlineScript'
         inlineScript: 'az appservice plan create -g ${{parameters.resourcegroup}} -n MyPlan --is-linux --sku ${{parameters.skusize}}'
         addSpnToEnvironment: true 
-      displayName: Create WebApp pla
       condition: and(succeeded(), eq('${{ parameters.islinux }}', true))
