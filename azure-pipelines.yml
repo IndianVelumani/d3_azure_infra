@@ -53,7 +53,7 @@ stages:
         azureSubscription: 'Free Trial(dcc87da0-ebd1-425f-a58b-a08f6f1490c9)'
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
-        inlineScript: 'az appservice plan create -g ${{parameters.resource_group}} -n MyPlan-linux -l "Central US" --is-linux --sku ${{parameters.sku_size}}'
+        inlineScript: 'az appservice plan create -g ${{parameters.resource_group}} -n MyPlan-linux -l "East US" --is-linux --sku ${{parameters.sku_size}}'
         addSpnToEnvironment: true 
       displayName: Azure WebApp for linux   
       condition: and(succeeded(), eq('${{ parameters.is_linux }}', true))
@@ -63,7 +63,7 @@ stages:
         azureSubscription: 'Free Trial(dcc87da0-ebd1-425f-a58b-a08f6f1490c9)'
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
-        inlineScript: 'az appservice plan create -g ${{parameters.resource_group}} -n MyPlan-Windows -l "Central US" --sku ${{parameters.sku_size}}'
+        inlineScript: 'az appservice plan create -g ${{parameters.resource_group}} -n MyPlan-Windows -l "East US" --sku ${{parameters.sku_size}}'
         addSpnToEnvironment: true 
       displayName: Azure WebApp for windows  
       condition: and(succeeded(), eq('${{ parameters.is_linux }}', false)) 
