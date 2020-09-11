@@ -45,6 +45,9 @@ stages:
   jobs:
   - job: 'Create or Update Azure WebApp'
     displayName: 'Create or Update Azure WebApp'
+
+    -steps:  
+      
     - task: AzureCLI@2
       inputs:
         azureSubscription: 'Free Trial(dcc87da0-ebd1-425f-a58b-a08f6f1490c9)'
@@ -52,5 +55,5 @@ stages:
         scriptLocation: 'inlineScript'
         inlineScript: 'az appservice plan create -g {{parameters.resource_group}} -n MyPlan --is-linux --sku ${{sku_size}}'
         addSpnToEnvironment: true 
-      displayName: Create WebApp plan
-      condition: ${{ if eq(parameters.is_linux, true) }} 
+      displayName: Create WebApp pla
+      condition: and(succeeded(), eq('${{ parameters.is_linux }}', true))
