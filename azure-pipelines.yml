@@ -11,6 +11,6 @@ steps:
     azureSubscription: 'Free Trial(dcc87da0-ebd1-425f-a58b-a08f6f1490c9)'
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
-    inlineScript: 'az appservice plan create -g d3_dev_01 -n MyPlan --is-linux --number-of-workers 4 --sku Free'
+    inlineScript: 'az appservice plan create -g d3_dev_01 -n MyPlan --is-linux --sku Free'
     #'az container create --resource-group d3_dev_01 --file container_instance.yml'
     addSpnToEnvironment: true 
