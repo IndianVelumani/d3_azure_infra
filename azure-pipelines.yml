@@ -77,3 +77,22 @@ stages:
         addSpnToEnvironment: true 
       displayName: Azure WebApp for windows  
       condition: and(succeeded(), eq('${{ parameters.is_linux }}', false)) 
+      
+
+- stage: 
+  jobs:
+  - job: 'CreateUpdate_Azure_Container_Instance_Group'
+    displayName: 'Create or Update Azure Azure conatiner Instance Group'
+
+    steps:  
+      
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'Free Trial(dcc87da0-ebd1-425f-a58b-a08f6f1490c9)'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: 'az container create --resource-group ${{parameters.resource_group}} --file container_instance.yml'
+        addSpnToEnvironment: true 
+      displayName: Azure WebApp for linux   
+
+
