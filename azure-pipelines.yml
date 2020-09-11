@@ -1,5 +1,5 @@
 parameters:
-- name: resourcegroup
+- name: resource_group
   displayName: Resource Group
   type: string
   default: d3_dev_01
@@ -7,7 +7,7 @@ parameters:
   - d3_dev_01
   - d3_qa_01
   
-- name: skusize
+- name: sku_size
   displayName: App Service Plan SKU & Size
   type: string
   default: FREE
@@ -31,7 +31,7 @@ parameters:
   - S2
   - S3
   - SHARED
-- name: islinux
+- name: is_linux
   displayName: Is Linux?
   type: boolean
   default: true
@@ -43,7 +43,7 @@ pool:
 stages:
 - stage: 
   jobs:
-  - job: 'Create or Update Azure WebApp'
+  - job: 'CreateUpdate_Azure_WebApp'
     displayName: 'Create or Update Azure WebApp'
 
     steps:  
@@ -53,6 +53,6 @@ stages:
         azureSubscription: 'Free Trial(dcc87da0-ebd1-425f-a58b-a08f6f1490c9)'
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
-        inlineScript: 'az appservice plan create -g ${{parameters.resourcegroup}} -n MyPlan --is-linux --sku ${{parameters.skusize}}'
+        inlineScript: 'az appservice plan create -g ${{parameters.resource_group}} -n MyPlan --is-linux --sku ${{parameters.sku_size}}'
         addSpnToEnvironment: true 
-      condition: and(succeeded(), eq('${{ parameters.islinux }}', true))
+      condition: and(succeeded(), eq('${{ parameters.is_linux }}', true))
