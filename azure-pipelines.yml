@@ -5,7 +5,7 @@ parameters:
   default: d3_dev_01
   values:
   - d3_dev_01
-  - d3_qa_01
+  - d3_qa_10
 
 - name: app_service_location
   displayName: App Service Plan Location
